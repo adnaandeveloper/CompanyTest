@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import StyledBreadcrumb from './components/StyledBreadcrumb';
 
-function App() {
+import { useLocation } from 'react-router-dom';
+import Setting from './pages/Setting';
+import Company from './pages/Company';
+import Project from './pages/Project';
+import SpecialProject from './pages/SpecialProject';
+
+const App = () => {
+  const location = useLocation();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <StyledBreadcrumb location={location} homePath="Settings" />
+      <Routes>
+        <Route path="/" element={<Setting />} />
+        <Route path="/companysettngs" element={<Company />} />
+        <Route path="/companysettngs/projectsettings" element={<Project />} />
+        <Route
+          path="/companysettng/projectsettings/spicialproject"
+          element={<SpecialProject />}
+        />
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;
