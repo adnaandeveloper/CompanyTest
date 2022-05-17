@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Breadcrumb, Col, Row } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeftOutlined } from '@ant-design/icons';
@@ -11,25 +11,25 @@ const StyledBreadcrumb = (props) => {
 
   const homepath = pathnames.map(
     (item, index) =>
-      index === 0 && <div style={{ marginRight: 5 }}>{props.homePath}</div>
+      index === 0 && (
+        <div key={index} style={{ marginRight: 5 }}>
+          {props.homePath}
+        </div>
+      )
   );
   const homePathWithArrow = props.showArrow ? (
-    <div
-      style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
-      onClick={() => console.log('hello !')}
-    >
+    <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
       <ArrowLeftOutlined style={{ marginRight: '4px' }} /> {homepath}
     </div>
   ) : (
-    <div style={{ cursor: 'pointer' }} onClick={() => console.log('hello !')}>
-      {homepath}
-    </div>
+    <div style={{ cursor: 'pointer' }}>{homepath}</div>
   );
   const lastPath = pathnames.map(
     (item, index, arr) =>
       arr.length - 1 === index && (
         <div>
           <ArrowLeftOutlined
+            key={index}
             onClick={() => {
               navigate(`${pathnames.slice(0, backPath - 1).join('/')}`);
               setBackPath(backPath - 1);
@@ -46,6 +46,7 @@ const StyledBreadcrumb = (props) => {
         {pathnames.map((item, index, arr) =>
           index === 0 ? (
             <BreadcrumbItem
+              key={index}
               style={{ marginRight: '2px' }}
               onClick={() => navigate('/')}
             >
@@ -54,6 +55,7 @@ const StyledBreadcrumb = (props) => {
           ) : item.length > 0 && arr.length - 1 === index ? (
             <Col span={24} style={{ marginTop: -8 }}>
               <BreadcrumbItem
+                key={index}
                 style={{ display: 'flex', flexDirection: 'row ' }}
               >
                 <div>{lastPath}</div>
