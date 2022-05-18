@@ -6,8 +6,8 @@ import BreadcrumbItem from 'antd/lib/breadcrumb/BreadcrumbItem';
 
 const StyledBreadcrumb = (props) => {
   let navigate = useNavigate();
-  const pathnames = props.location.pathname.split('/');
-  const [backPath, setBackPath] = useState(pathnames.length);
+  const pathnames = props.breadCrumbs.pathname.split('/');
+  const [backPathIndex, setBackPathIndex] = useState(pathnames.length);
 
   const homepath = pathnames.map(
     (item, index) =>
@@ -18,11 +18,16 @@ const StyledBreadcrumb = (props) => {
       )
   );
   const homePathWithArrow = props.showArrow ? (
-    <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+    <div
+      onClick={navigate('/')}
+      style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
+    >
       <ArrowLeftOutlined style={{ marginRight: '4px' }} /> {homepath}
     </div>
   ) : (
-    <div style={{ cursor: 'pointer' }}>{homepath}</div>
+    <div style={{ cursor: 'pointer' }} onClick={navigate('/')}>
+      {homepath}
+    </div>
   );
   const lastPath = pathnames.map(
     (item, index, arr) =>
@@ -31,8 +36,8 @@ const StyledBreadcrumb = (props) => {
           <ArrowLeftOutlined
             key={index}
             onClick={() => {
-              navigate(`${pathnames.slice(0, backPath - 1).join('/')}`);
-              setBackPath(backPath - 1);
+              props.onBack(pathnames, backPathIndex);
+              setBackPathIndex(backPathIndex - 1);
             }}
           />
           {item}
@@ -45,11 +50,7 @@ const StyledBreadcrumb = (props) => {
       <Breadcrumb separator={' '} style={{ display: 'flex' }}>
         {pathnames.map((item, index, arr) =>
           index === 0 ? (
-            <BreadcrumbItem
-              key={index}
-              style={{ marginRight: '2px' }}
-              onClick={() => navigate('/')}
-            >
+            <BreadcrumbItem key={index} style={{ marginRight: '2px' }}>
               {homePathWithArrow}
             </BreadcrumbItem>
           ) : item.length > 0 && arr.length - 1 === index ? (
@@ -64,11 +65,9 @@ const StyledBreadcrumb = (props) => {
           ) : (
             <BreadcrumbItem
               style={{ cursor: 'pointer' }}
-              onClick={() =>
-                navigate(`${pathnames.slice(0, index + 1).join('/')}`)
-              }
+              onClick={() => props.onBack(pathnames, backPathIndex)}
             >
-              {item.length > 1 && '/ '} {item}{' '}
+              {item.length > 1 && '/ '} {item}
             </BreadcrumbItem>
           )
         )}
