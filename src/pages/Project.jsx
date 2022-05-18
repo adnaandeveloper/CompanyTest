@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Project = () => {
-  return <div>Project Setting</div>;
+  return <div></div>;
 };
 
 export default Project;

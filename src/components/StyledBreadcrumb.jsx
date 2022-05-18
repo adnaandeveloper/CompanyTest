@@ -58,7 +58,7 @@ const StyledBreadcrumb = (props) => {
                 key={index}
                 style={{ display: 'flex', flexDirection: 'row ' }}
               >
-                <div>{lastPath}</div>
+                <div style={{ fontWeight: '799' }}>{lastPath}</div>
               </BreadcrumbItem>
             </Col>
           ) : (
