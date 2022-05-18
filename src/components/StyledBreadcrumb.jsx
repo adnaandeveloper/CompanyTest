@@ -62,6 +62,7 @@ const StyledBreadcrumb = (props) => {
             </Col>
           ) : (
             <BreadcrumbItem
+              key={index}
               style={{ cursor: 'pointer' }}
               onClick={() => props.onBack(pathnames, index)}
             >
