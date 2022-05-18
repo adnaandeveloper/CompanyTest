@@ -12,7 +12,7 @@ const App = () => {
   let navigate = useNavigate();
   const location = useLocation();
   const onBack = (array, index) => {
-    navigate(`${array.slice(0, index - 1).join('/')}`);
+    navigate(`${array.slice(0, index + 1).join('/')}`);
     console.log('hello adnaan');
   };
 
