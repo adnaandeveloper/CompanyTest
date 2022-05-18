@@ -1,10 +1,9 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import StyledTag from '../components/StyledTag';
 
 const Setting = () => {
   let navigate = useNavigate();
-  const location = useLocation();
   return (
     <>
       <StyledTag bold />

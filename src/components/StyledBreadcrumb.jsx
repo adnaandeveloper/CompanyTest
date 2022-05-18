@@ -26,7 +26,7 @@ const StyledBreadcrumb = (props) => {
   const lastPath = pathnames.map(
     (item, index, arr) =>
       arr.length - 1 === index && (
-        <div>
+        <div style={{ fontWeight: '800' }}>
           <ArrowLeftOutlined
             key={index}
             onClick={() => {
@@ -65,7 +65,7 @@ const StyledBreadcrumb = (props) => {
               style={{ cursor: 'pointer' }}
               onClick={() => props.onBack(pathnames, index)}
             >
-              {item.length > 1 && '/ '} {item}{' '}
+              {item.length > 1 && '/ '} {item}
             </BreadcrumbItem>
           )
         )}
